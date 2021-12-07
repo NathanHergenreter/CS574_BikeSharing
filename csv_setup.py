@@ -41,3 +41,19 @@ def get_bike_sharing_df_clean():
 
 get_bike_sharing_df_clean().head(5)
 
+# In[11]:
+
+from sklearn.preprocessing import MinMaxScaler
+
+def get_bike_sharing_df_clean_mod():
+    # Copy orig to new df
+    bike_sharing_df_orig = get_bike_sharing_df_clean()
+    bike_sharing_df = bike_sharing_df_orig.copy()
+    scaler = MinMaxScaler()
+    
+    scaled = scaler.fit_transform(bike_sharing_df)
+    
+    return pd.DataFrame(scaled, columns=['hr', 'holiday', 'workingday', 'weathersit', 'atemp', 'hum', 'windspeed', 'cnt', 'no_snow','medium_snow','heavy_snow'])
+
+# In[12]:
+get_bike_sharing_df_clean_mod().head(5)
